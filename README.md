@@ -173,6 +173,10 @@ This bash script allows you to create multiple users on a Linux system in bulk. 
 ## Usage
 
 ``` bash
+
+vim create_users.sh
+
+
 #!/bin/bash
  
 # Check if the input file is provided
