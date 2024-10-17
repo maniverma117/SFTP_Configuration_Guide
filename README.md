@@ -161,6 +161,117 @@ In this configuration, the same home directory is used for both SFTP and SSH. Th
 
 ---
 
+
+## To Create Bulk User
+
+
+  ```bash
+
+#!/bin/bash
+ 
+# Check if the input file is provided
+if [ $# -ne 1 ]; then
+  echo "Usage: $0 <userfile>"
+  exit 1
+fi
+ 
+# Read the input file
+input_file="$1"
+ 
+# Loop through each line in the file
+while IFS=' ' read -r user_name password; do
+  # Create the user's home directory
+  mkdir -p "/home/$user_name/uploads"
+
+  # Create the user with the specified shell and home directory
+  useradd -s /bin/bash -d "/home/$user_name/uploads" "$user_name"
+
+  chmod 770 /home/$user_name/uploads
+  # Set the user's password
+  echo "$user_name:$password" | chpasswd
+ 
+  echo "User $user_name created with home directory /home/$user_name/uploads"
+done < "$input_file"
+ 
+  ```
+
+
+Here's a `README.md` file that describes your bash script for bulk user creation:
+
+```markdown
+# Bulk User Creation Script
+
+This bash script allows you to create multiple users on a Linux system in bulk. It reads a list of usernames and passwords from a file and creates corresponding user accounts, setting up specific directories and permissions for each user.
+
+## Usage
+
+```bash
+./create_users.sh <userfile>
+```
+
+- `<userfile>`: A text file containing usernames and passwords, with each line formatted as follows:
+  ```
+  username password
+  ```
+
+### Example
+
+Create a file named `userlist.txt` with the following content:
+
+```
+user1 password1
+user2 password2
+```
+
+Then, run the script:
+
+```bash
+./create_users.sh userlist.txt
+```
+
+## Script Functionality
+
+1. **Input File Check**: The script expects one argument – the path to the user file. If not provided, it will display a usage message and exit.
+   
+2. **Reading User File**: The script reads the file line by line. Each line should contain a username and a password separated by a space.
+
+3. **User Creation**:
+   - For each user, it creates a home directory inside `/home/<username>/uploads`.
+   - Adds the user with `/bin/bash` as their default shell and sets their home directory to `/home/<username>/uploads`.
+   - Sets appropriate permissions (`770`) on the user's home directory.
+   
+4. **Password Setup**: The script sets the provided password for each user using the `chpasswd` command.
+
+5. **Confirmation**: For each user, a message confirming the creation of the user and their home directory is displayed.
+
+## Requirements
+
+- Bash shell
+- Root or sudo privileges to create users
+
+## Important Notes
+
+- Ensure the input file is properly formatted with a space between the username and password.
+- The script must be run as root or using `sudo` to create users and set passwords.
+- Be cautious when handling passwords in plaintext files for security purposes.
+
+## Example Output
+
+```
+User user1 created with home directory /home/user1/uploads
+User user2 created with home directory /home/user2/uploads
+```
+
+## License
+
+This project is licensed under the MIT License. See the `LICENSE` file for details.
+```
+
+Feel free to modify it as needed!
+
+
+---
+
 ## Conclusion
 
 This guide helps you configure an SFTP environment where you can either have separate directories for SSH and SFTP or use the same home directory for both.
