@@ -1,7 +1,4 @@
 
-
----
-
 # SFTP Configuration Guide
 
 This guide outlines the steps to set up SFTP with SSH, where users can either have different landing directories for SFTP and SSH or the same landing directory for both.
