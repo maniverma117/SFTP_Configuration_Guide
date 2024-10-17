@@ -165,8 +165,14 @@ In this configuration, the same home directory is used for both SFTP and SSH. Th
 ## To Create Bulk User
 
 
-  ```bash
+```markdown
+# Bulk User Creation Script
 
+This bash script allows you to create multiple users on a Linux system in bulk. It reads a list of usernames and passwords from a file and creates corresponding user accounts, setting up specific directories and permissions for each user.
+
+## Usage
+
+``` bash
 #!/bin/bash
  
 # Check if the input file is provided
@@ -192,15 +198,9 @@ while IFS=' ' read -r user_name password; do
  
   echo "User $user_name created with home directory /home/$user_name/uploads"
 done < "$input_file"
- 
-  ```
 
-```markdown
-# Bulk User Creation Script
 
-This bash script allows you to create multiple users on a Linux system in bulk. It reads a list of usernames and passwords from a file and creates corresponding user accounts, setting up specific directories and permissions for each user.
-
-## Usage
+```
 
 ```bash
 ./create_users.sh <userfile>
