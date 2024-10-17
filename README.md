@@ -195,9 +195,6 @@ done < "$input_file"
  
   ```
 
-
-Here's a `README.md` file that describes your bash script for bulk user creation:
-
 ```markdown
 # Bulk User Creation Script
 
