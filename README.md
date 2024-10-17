@@ -122,21 +122,8 @@ In this configuration, the same home directory is used for both SFTP and SSH. Th
    - `ChrootDirectory /home/%u`: Restricts each user to their respective `/home/<username>` directory.
    - `ForceCommand internal-sftp`: Forces the use of the internal SFTP server.
 
-2. **Set Permissions**
 
-   Ensure the `/home/<username>` directory is properly owned by `root` and that subdirectories are owned by the respective users:
-
-   ```bash
-   sudo chown root:root /home/user1
-   sudo mkdir /home/user1/files
-   sudo chown user1:user1 /home/user1/files
-
-   sudo chown root:root /home/user2
-   sudo mkdir /home/user2/files
-   sudo chown user2:user2 /home/user2/files
-   ```
-
-3. **Restart the SSH Service**
+2. **Restart the SSH Service**
 
    Apply the changes by restarting the SSH service:
 
